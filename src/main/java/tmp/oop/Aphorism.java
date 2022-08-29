@@ -4,10 +4,7 @@ import java.io.PrintWriter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class Aphorism implements Wisdom {
-
-    private String text;
-
+public class Aphorism extends Wisdom {
     private String author;
 
     /***

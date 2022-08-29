@@ -4,9 +4,7 @@ import java.io.PrintWriter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class Proverb implements Wisdom {
-    //Пословица
-    private String text;
+public class Proverb extends Wisdom {
     //Страна
     private String country;
 
