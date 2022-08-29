@@ -6,6 +6,10 @@ import java.util.Scanner;
 abstract class Wisdom {
     //Текст мудрости
     String text;
+
+    //Субъективная оценка мудрости
+    byte rate;
+
     /***
      * Типы мудростей
      */

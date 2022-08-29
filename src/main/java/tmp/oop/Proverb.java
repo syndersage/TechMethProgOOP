@@ -18,6 +18,8 @@ public class Proverb extends Wisdom {
         try {
             this.country = scan.nextLine();
             this.text = scan.nextLine();
+            this.rate = Byte.parseByte(scan.nextLine());
+            if (rate < 1 | rate > 10) throw new NumberFormatException();
         } catch (NoSuchElementException e) {
             System.out.println("Cannot read wisdom: end of file");
         }
