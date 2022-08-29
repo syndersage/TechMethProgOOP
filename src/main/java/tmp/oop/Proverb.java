@@ -17,9 +17,12 @@ public class Proverb extends Wisdom {
     public void in(Scanner scan) {
         try {
             this.country = scan.nextLine();
-            this.text = scan.nextLine();
+            inText(scan);
+            inRate(scan);
         } catch (NoSuchElementException e) {
             System.out.println("Cannot read wisdom: end of file");
+        } catch (NumberFormatException e) {
+            System.out.println("Wisdom skipped: Incorrect rating input. Expected: 1 - 10");
         }
     }
 
@@ -29,16 +32,16 @@ public class Proverb extends Wisdom {
      */
     @Override
     public void out(PrintWriter pw) {
-        pw.println("Proverb: " + text + ". From: " + country + ".");
+        pw.println("Proverb: " + text + ". From: " + country + ". Rating score: " + rate);
     }
 
     /***
-     * Экземпляр пословицы проверяется на то, что текст и страна не null и не пустые
+     * Экземпляр пословицы проверяется на валидность родительского метода и то что поле страна не null и не пустое
      *
      * @return boolean - можно или нет считать экземпляр валидным
      */
     @Override
     public boolean valid() {
-        return text != null && !text.isBlank() & country != null && !text.isBlank();
+        return super.valid() & country != null && !text.isBlank();
     }
 }

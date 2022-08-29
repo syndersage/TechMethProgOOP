@@ -16,9 +16,12 @@ public class Aphorism extends Wisdom {
     public void in(Scanner scan) {
         try {
             this.author = scan.nextLine();
-            this.text = scan.nextLine();
+            inText(scan);
+            inRate(scan);
         } catch (NoSuchElementException e) {
             System.out.println("Cannot read wisdom: end of file");
+        } catch (NumberFormatException e) {
+            System.out.println("Wisdom skipped: Incorrect rating input. Expected: 1 - 10");
         }
     }
 
@@ -28,16 +31,16 @@ public class Aphorism extends Wisdom {
      */
     @Override
     public void out(PrintWriter pw) {
-        pw.println("Aphorism: " + text + ". By: " + author + ".");
+        pw.println("Aphorism: " + text + ". By: " + author + ". Rating score: " + rate);
     }
 
     /***
-     * Экземпляр афоризмы проверяется на то, что текст и автор не null и не пустые
+     * Экземпляр афоризмы проверяется на валидность родительского метода и то что поле автор не null и не пустое
      *
      * @return boolean - можно или нет считать экземпляр валидным
      */
     @Override
     public boolean valid() {
-        return text != null && !text.isBlank() & author != null && !author.isBlank();
+        return super.valid() & author != null && !author.isBlank();
     }
 }

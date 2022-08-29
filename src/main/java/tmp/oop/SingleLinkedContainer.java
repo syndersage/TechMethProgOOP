@@ -21,10 +21,10 @@ public class SingleLinkedContainer {
      */
     public void in(Scanner scan) throws IllegalStateException, IOException {
         while (scan.hasNextLine()) {
-            int typeNumber = 0;
+            String typeNumber = "-1"; //Строка для чтения типа мудрости
             try {
-                typeNumber = Integer.parseInt(scan.nextLine()) - 1;
-                Wisdom.NodeType type = Wisdom.NodeType.values()[typeNumber];
+                typeNumber = scan.nextLine();
+                Wisdom.NodeType type = Wisdom.NodeType.values()[Integer.parseInt(typeNumber) - 1];
                 Wisdom wisdom;
                 switch (type) {
                     //Создание экземпляра указанного типа мудрости
@@ -40,19 +40,16 @@ public class SingleLinkedContainer {
                     if (head == null) head = newNode;
                     tail = newNode;
                     size++;
+                    System.out.println("+Wisdom");
                 }
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 //Введено несуществующее значение типа мудрости
-                //Пропускаются 2 последующие строчки из-за невозможности определния типа
-                System.out.println("Wisdom skipped: non-existent wisdom type: " + (typeNumber + 1));
-                if (scan.hasNextLine()) scan.nextLine();
-                else return;
-                if (scan.hasNextLine()) scan.nextLine();
-                else return;
-            } catch (NumberFormatException e) {
-                //Вместо числового типа мудрости указан другой текст
-                while (scan.hasNextLine() && !scan.hasNextInt()) scan.nextLine();
-                if (!scan.hasNextLine()) return;
+                //Пропускаются 3 последующие строчки из-за невозможности определния типа
+                System.out.println("Wisdom skipped: non-existent wisdom type: " + typeNumber);
+                for (int i = 0; i < 3; i++) {
+                    if (scan.hasNextLine()) scan.nextLine();
+                    else return;
+                }
             }
         }
     }
