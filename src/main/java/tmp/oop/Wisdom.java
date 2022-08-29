@@ -18,4 +18,15 @@ abstract class Wisdom {
     abstract void out(PrintWriter pw);
     //Проверка мудрости на корректность
     abstract boolean valid();
+
+    /***
+     * Подсчет количества знаков припинания у мудрости (поля text)
+     *
+     * @return целое число - кол-во знаков препинания
+     */
+    long countPunctuationMarks() {
+        //Строка из символов, которые будут восприниматься как знаки препинания
+        String punMarks = "!.,:;'-?\"";
+        return text.chars().filter((x) -> punMarks.indexOf(x) != -1).count(); //Удаление из потока всех символов, не входящими в строку punMarks и вывод их количества
+    }
 }
