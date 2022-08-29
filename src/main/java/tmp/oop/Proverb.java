@@ -17,7 +17,7 @@ public class Proverb extends Wisdom {
     public void in(Scanner scan) {
         try {
             this.country = scan.nextLine();
-            this.text = scan.nextLine();
+            inText(scan);
         } catch (NoSuchElementException e) {
             System.out.println("Cannot read wisdom: end of file");
         }
