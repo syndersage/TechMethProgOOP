@@ -1,6 +1,7 @@
 package tmp.oop;
 
 import java.io.PrintWriter;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 abstract class Wisdom {
@@ -18,6 +19,9 @@ abstract class Wisdom {
     }
     //Заполнение полей мудрости
     abstract void in(Scanner scan);
+    void inText(Scanner scan) throws NoSuchElementException {
+        this.text = scan.nextLine();
+    }
     //Вывод информации о полях мудрости
     abstract void out(PrintWriter pw);
     //Проверка мудрости на корректность
