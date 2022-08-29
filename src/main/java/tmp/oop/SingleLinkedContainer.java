@@ -24,7 +24,7 @@ public class SingleLinkedContainer {
             int typeNumber = 0;
             try {
                 typeNumber = Integer.parseInt(scan.nextLine()) - 1;
-                NodeType type = NodeType.values()[typeNumber];
+                Wisdom.NodeType type = Wisdom.NodeType.values()[typeNumber];
                 Wisdom wisdom;
                 switch (type) {
                     //Создание экземпляра указанного типа мудрости
@@ -91,13 +91,6 @@ public class SingleLinkedContainer {
 
     public Node getTail() {
         return tail;
-    }
-
-    /***
-     * Типы мудростей
-     */
-    enum NodeType {
-        APHORISM, PROVERB
     }
 
     static class Node {
