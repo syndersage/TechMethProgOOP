@@ -9,7 +9,7 @@ public class Proverb extends Wisdom {
     private String country;
 
     /***
-     * В экземпляр построчно передается иноформация из переданного источника о стране и пословице
+     * В экземпляр построчно заносится иноформация из переданного источника о стране и пословице
      *
      * @param scan источник иноформации
      */
@@ -19,9 +19,9 @@ public class Proverb extends Wisdom {
             this.country = scan.nextLine();
             super.in(scan);
         } catch (NoSuchElementException e) {
-            if (Client.verbose) Client.logOut.println("Cannot read wisdom: end of file");
+            if (Client.verbose) Client.logOut.print("Cannot read wisdom: end of file. ");
         } catch (NumberFormatException e) {
-            if (Client.verbose) Client.logOut.println("Wisdom skipped: Incorrect rating input. Expected: 1 - 10");
+            if (Client.verbose) Client.logOut.print("Incorrect rating input: Expected: [1 ... 10]. ");
         }
     }
 
@@ -31,7 +31,7 @@ public class Proverb extends Wisdom {
      */
     @Override
     public void out(PrintWriter pw) {
-        pw.println("Proverb: " + text + ". From: " + country + ". Rating score: " + rate);
+        pw.println("Proverb: " + getText() + ". From: " + country + ". Rating score: " + getRate());
     }
 
     /***
@@ -42,6 +42,6 @@ public class Proverb extends Wisdom {
      */
     @Override
     public boolean valid() {
-        return super.valid() & country != null && !text.isBlank();
+        return super.valid() & country != null && !country.isBlank();
     }
 }

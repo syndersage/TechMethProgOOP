@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 public abstract class Wisdom implements Comparable<Wisdom> {
     //Текст мудрости
-    String text;
+    private String text;
 
     //Оценка мудрости
-    byte rate;
+    private byte rate;
 
     //Типы мудростей
     enum NodeType {

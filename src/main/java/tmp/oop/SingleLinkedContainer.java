@@ -12,6 +12,7 @@ public class SingleLinkedContainer {
     //Последний элемент
     private Node tail;
 
+
     /***
      * Чтение из источника информации о мудростях, и запись их в список
      *
@@ -20,11 +21,12 @@ public class SingleLinkedContainer {
      * @throws IOException при проблемах с чтением из источника
      */
     public void in(Scanner scan) throws IllegalStateException, IOException {
+        final int numberOfWisdomFields = 3;
         while (scan.hasNextLine()) {
             String typeNumber = "-1"; //Строка для чтения типа мудрости
             try {
                 typeNumber = scan.nextLine();
-                if (typeNumber.isBlank()) continue;
+                if (typeNumber.isBlank()) continue; //Если пустая строка, то переходит на следующую, воспринимая её как начало мудрости (её тип)
                 Wisdom.NodeType type = Wisdom.NodeType.values()[Integer.parseInt(typeNumber.strip()) - 1];
                 Wisdom wisdom;
                 switch (type) {
@@ -43,12 +45,12 @@ public class SingleLinkedContainer {
                     tail = newNode;
                     size++;
                     if (Client.verbose) Client.logOut.println("+Wisdom");
-                }
+                } else if (Client.verbose) Client.logOut.println("Wisdom skipped: incorrect wisdom parameters");
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 //Введено несуществующее значение типа мудрости
-                //Пропускаются 3 последующие строчки из-за невозможности определния типа
-                if (Client.verbose) Client.logOut.println("Wisdom skipped: non-existent wisdom type: " + typeNumber);
-                for (int i = 0; i < 3; i++) {
+                //Пропускаются numberOfWisdomFields последующие строчки из-за невозможности определния типа
+                if (Client.verbose) Client.logOut.println("Wisdom skipped, moved by " + numberOfWisdomFields + " lines: Non-existent wisdom type: " + typeNumber);
+                for (int i = 0; i < numberOfWisdomFields; i++) {
                     if (scan.hasNextLine()) scan.nextLine();
                     else return;
                 }
