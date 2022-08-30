@@ -14,11 +14,10 @@ public class Riddle extends Wisdom {
      * @param scan источник иноформации
      */
     @Override
-    void in(Scanner scan) {
+    public void in(Scanner scan) {
         try {
             this.answer = scan.nextLine();
-            inText(scan);
-            inRate(scan);
+            super.in(scan);
         } catch (NoSuchElementException e) {
             System.out.println("Cannot read wisdom: end of file");
         } catch (NumberFormatException e) {
@@ -31,7 +30,7 @@ public class Riddle extends Wisdom {
      * @param pw ресурс для вывода информации
      */
     @Override
-    void out(PrintWriter pw) {
+    public void out(PrintWriter pw) {
         pw.println("Riddle: " + text + ". Answer: " + answer + ".");
     }
 
@@ -41,7 +40,7 @@ public class Riddle extends Wisdom {
      * @return boolean - можно или нет считать экземпляр валидным
      */
     @Override
-    boolean valid() {
+    public boolean valid() {
         return super.valid() & answer != null && !answer.isBlank();
     }
 }

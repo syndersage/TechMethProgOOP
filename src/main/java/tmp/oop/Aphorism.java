@@ -17,8 +17,7 @@ public class Aphorism extends Wisdom {
     public void in(Scanner scan) {
         try {
             this.author = scan.nextLine();
-            inText(scan);
-            inRate(scan);
+            super.in(scan);
         } catch (NoSuchElementException e) {
             System.out.println("Cannot read wisdom: end of file");
         } catch (NumberFormatException e) {
