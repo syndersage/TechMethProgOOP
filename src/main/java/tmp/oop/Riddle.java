@@ -19,9 +19,9 @@ public class Riddle extends Wisdom {
             this.answer = scan.nextLine();
             super.in(scan);
         } catch (NoSuchElementException e) {
-            System.out.println("Cannot read wisdom: end of file");
+            if (Client.verbose) Client.logOut.println("Cannot read wisdom: end of file");
         } catch (NumberFormatException e) {
-            System.out.println("Wisdom skipped: Incorrect rating input. Expected: 1 - 10");
+            if (Client.verbose) Client.logOut.println("Wisdom skipped: Incorrect rating input. Expected: 1 - 10");
         }
     }
 

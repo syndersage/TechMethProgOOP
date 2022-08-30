@@ -42,12 +42,12 @@ public class SingleLinkedContainer {
                     if (head == null) head = newNode;
                     tail = newNode;
                     size++;
-                    System.out.println("+Wisdom");
+                    if (Client.verbose) Client.logOut.println("+Wisdom");
                 }
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 //Введено несуществующее значение типа мудрости
                 //Пропускаются 3 последующие строчки из-за невозможности определния типа
-                System.out.println("Wisdom skipped: non-existent wisdom type: " + typeNumber);
+                if (Client.verbose) Client.logOut.println("Wisdom skipped: non-existent wisdom type: " + typeNumber);
                 for (int i = 0; i < 3; i++) {
                     if (scan.hasNextLine()) scan.nextLine();
                     else return;
