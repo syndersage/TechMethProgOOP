@@ -25,6 +25,7 @@ public class Client {
             PrintWriter pw = new PrintWriter(outputFilePath)) { //Получение абсолютного пути к файлу записи из 2 параметра
             slc.in(scan);
             pw.println("Filled container.\nContainer contains " + slc.getSize() + " elements.");
+            slc.sort();
             slc.out(pw);
             slc.clear();
             pw.println("Empty container.\nContainer contains " + slc.getSize() + " elements.");

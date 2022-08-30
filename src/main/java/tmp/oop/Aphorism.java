@@ -5,6 +5,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Aphorism extends Wisdom {
+    //Автор афоризмы
     private String author;
 
     /***
