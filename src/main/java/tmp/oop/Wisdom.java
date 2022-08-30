@@ -13,7 +13,7 @@ abstract class Wisdom implements Comparable<Wisdom> {
 
     //Типы мудростей
     enum NodeType {
-        APHORISM, PROVERB
+        APHORISM, PROVERB, RIDDLE
     }
     //Заполнение полей мудрости
     abstract void in(Scanner scan);

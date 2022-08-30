@@ -30,6 +30,7 @@ public class SingleLinkedContainer {
                     //Создание экземпляра указанного типа мудрости
                     case PROVERB -> wisdom = new Proverb();
                     case APHORISM -> wisdom = new Aphorism();
+                    case RIDDLE -> wisdom = new Riddle();
                     default -> throw new IllegalStateException("Unexpected value: " + type);
                 }
                 wisdom.in(scan);
