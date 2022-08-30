@@ -17,9 +17,12 @@ public class Riddle extends Wisdom {
     void in(Scanner scan) {
         try {
             this.answer = scan.nextLine();
-            this.text = scan.nextLine();
+            inText(scan);
+            inRate(scan);
         } catch (NoSuchElementException e) {
             System.out.println("Cannot read wisdom: end of file");
+        } catch (NumberFormatException e) {
+            System.out.println("Wisdom skipped: Incorrect rating input. Expected: 1 - 10");
         }
     }
 
@@ -39,6 +42,6 @@ public class Riddle extends Wisdom {
      */
     @Override
     boolean valid() {
-        return text != null && !text.isBlank() & answer != null && !answer.isBlank();
+        return super.valid() & answer != null && !answer.isBlank();
     }
 }
