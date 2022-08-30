@@ -21,10 +21,10 @@ public class SingleLinkedContainer {
      */
     public void in(Scanner scan) throws IllegalStateException, IOException {
         while (scan.hasNextLine()) {
-            int typeNumber = 0;
+            String typeNumber = "-1";
             try {
-                typeNumber = Integer.parseInt(scan.nextLine()) - 1;
-                Wisdom.NodeType type = Wisdom.NodeType.values()[typeNumber];
+                typeNumber = scan.nextLine();
+                Wisdom.NodeType type = Wisdom.NodeType.values()[Integer.parseInt(typeNumber) - 1];
                 Wisdom wisdom;
                 switch (type) {
                     //Создание экземпляра указанного типа мудрости
@@ -44,11 +44,11 @@ public class SingleLinkedContainer {
             } catch (ArrayIndexOutOfBoundsException e) {
                 //Введено несуществующее значение типа мудрости
                 //Пропускаются 2 последующие строчки из-за невозможности определния типа
-                System.out.println("Wisdom skipped: non-existent wisdom type: " + (typeNumber + 1));
-                if (scan.hasNextLine()) scan.nextLine();
-                else return;
-                if (scan.hasNextLine()) scan.nextLine();
-                else return;
+                System.out.println("Wisdom skipped: non-existent wisdom type: " + typeNumber);
+                for (int i = 0; i < 2; i++) {
+                    if (scan.hasNextLine()) scan.nextLine();
+                    else return;
+                }
             } catch (NumberFormatException e) {
                 //Вместо числового типа мудрости указан другой текст
                 while (scan.hasNextLine() && !scan.hasNextInt()) scan.nextLine();
@@ -80,6 +80,39 @@ public class SingleLinkedContainer {
         head = null;
     }
 
+    /***
+     * Сортировка списка методом вставки (у Node меняются значения Wisdom)
+     */
+    public void sort() {
+        int j;
+        for (int i = 1; i < size; i++) {
+            j = i;
+            while (j > 0) {
+                Node n1 = getNode(j);
+                Node n2 = getNode(j - 1);
+                if (n1 == null | n2 == null) return;
+                if (n1.wisdom.compareTo(n2.wisdom) > 0) break;
+                Wisdom temp = n1.wisdom;
+                n1.wisdom = n2.wisdom;
+                n2.wisdom = temp;
+                j--;
+            }
+        }
+    }
+
+    /***
+     * Вспомогательный метод для поиска элемента с указанным порядковым номером.
+     * Производится проверка на корректность переданного в параметрах индекса
+     *
+     * @param index порядковый номер элемента из списка
+     * @return элемент тип Node в случае если порядковый номер (индекс) больше 0 и меньше размера списка, иначе null
+     */
+    private Node getNode(int index) {
+        if (index < 0 | index > size - 1) return null;
+        Node node = this.head;
+        for (int i = 0; i < index; i++) node = node.next;
+        return node;
+    }
 
     public int getSize() {
         return size;
