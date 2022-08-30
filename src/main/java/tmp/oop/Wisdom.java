@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-abstract class Wisdom implements Comparable<Wisdom> {
+public abstract class Wisdom implements Comparable<Wisdom> {
     //Текст мудрости
     String text;
 
@@ -16,7 +16,10 @@ abstract class Wisdom implements Comparable<Wisdom> {
         APHORISM, PROVERB, RIDDLE
     }
     //Заполнение полей мудрости
-    abstract void in(Scanner scan);
+    public void in(Scanner scan) {
+        inText(scan);
+        inRate(scan);
+    }
 
     /***
      * Чтение текста мудрости и запись в соответствующее поле
@@ -24,7 +27,7 @@ abstract class Wisdom implements Comparable<Wisdom> {
      * @param scan источник данных
      * @throws NoSuchElementException если не удается прочитать строку (конец файла)
      */
-    void inText(Scanner scan) throws NoSuchElementException {
+    public void inText(Scanner scan) throws NoSuchElementException {
         this.text = scan.nextLine();
     }
 
@@ -35,7 +38,7 @@ abstract class Wisdom implements Comparable<Wisdom> {
      * @throws NumberFormatException если в строке указано не byte значение, либо величина не соответствует требуемым значениям
      * @throws NoSuchElementException если не удается прочитать строку (конец файла)
      */
-    void inRate(Scanner scanner) throws NumberFormatException, NoSuchElementException {
+    public void inRate(Scanner scanner) throws NumberFormatException, NoSuchElementException {
         rate = 0; //По-умолчанию значение 0 - оценка отсутствует
         this.rate = Byte.parseByte(scanner.nextLine());
         if (rate < 1 | rate > 10) {
@@ -45,7 +48,7 @@ abstract class Wisdom implements Comparable<Wisdom> {
     }
 
     //Вывод информации о полях мудрости
-    abstract void out(PrintWriter pw);
+    public abstract void out(PrintWriter pw);
 
 
     /***
@@ -53,8 +56,16 @@ abstract class Wisdom implements Comparable<Wisdom> {
      *
      * @return является ли экземпляр корректным
      */
-    boolean valid() {
+    public boolean valid() {
         return text != null && !text.isBlank() & rate != 0;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public byte getRate() {
+        return rate;
     }
 
     /***
