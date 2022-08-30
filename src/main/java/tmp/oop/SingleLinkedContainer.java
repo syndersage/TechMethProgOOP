@@ -77,6 +77,39 @@ public class SingleLinkedContainer {
         head = null;
     }
 
+    /***
+     * Сортировка списка методом вставки (у Node меняются значения Wisdom)
+     */
+    public void sort() {
+        int j;
+        for (int i = 1; i < size; i++) {
+            j = i;
+            while (j > 0) {
+                Node n1 = getNode(j);
+                Node n2 = getNode(j - 1);
+                if (n1 == null | n2 == null) return;
+                if (n1.wisdom.compareTo(n2.wisdom) > 0) break;
+                Wisdom temp = n1.wisdom;
+                n1.wisdom = n2.wisdom;
+                n2.wisdom = temp;
+                j--;
+            }
+        }
+    }
+
+    /***
+     * Вспомогательный метод для поиска элемента с указанным порядковым номером.
+     * Производится проверка на корректность переданного в параметрах индекса
+     *
+     * @param index порядковый номер элемента из списка
+     * @return элемент тип Node в случае если порядковый номер (индекс) больше 0 и меньше размера списка, иначе null
+     */
+    private Node getNode(int index) {
+        if (index < 0 | index > size - 1) return null;
+        Node node = this.head;
+        for (int i = 0; i < index; i++) node = node.next;
+        return node;
+    }
 
     public int getSize() {
         return size;
