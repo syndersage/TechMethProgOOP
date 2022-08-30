@@ -24,7 +24,8 @@ public class SingleLinkedContainer {
             String typeNumber = "-1"; //Строка для чтения типа мудрости
             try {
                 typeNumber = scan.nextLine();
-                Wisdom.NodeType type = Wisdom.NodeType.values()[Integer.parseInt(typeNumber) - 1];
+                if (typeNumber.isBlank()) continue;
+                Wisdom.NodeType type = Wisdom.NodeType.values()[Integer.parseInt(typeNumber.strip()) - 1];
                 Wisdom wisdom;
                 switch (type) {
                     //Создание экземпляра указанного типа мудрости
@@ -89,7 +90,7 @@ public class SingleLinkedContainer {
                 Node n1 = getNode(j);
                 Node n2 = getNode(j - 1);
                 if (n1 == null | n2 == null) return;
-                if (n1.wisdom.compareTo(n2.wisdom) > 0) break;
+                if (n1.wisdom.compareTo(n2.wisdom) >= 0) break;
                 Wisdom temp = n1.wisdom;
                 n1.wisdom = n2.wisdom;
                 n2.wisdom = temp;
