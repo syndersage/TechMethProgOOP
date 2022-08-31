@@ -1,8 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-
 import tmp.oop.SingleLinkedContainer;
 
 import java.io.IOException;
@@ -12,6 +10,8 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.Scanner;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("SingleLinkedContainer tests")
 public class ContainerTest {
@@ -23,7 +23,7 @@ public class ContainerTest {
     String input;
 
     @BeforeEach
-    public void initEach(){
+    public void initEach() {
         output = new StringWriter();
         slc.clear();
     }

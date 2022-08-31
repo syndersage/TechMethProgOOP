@@ -26,7 +26,8 @@ public class SingleLinkedContainer {
             String typeNumber = "-1"; //Строка для чтения типа мудрости
             try {
                 typeNumber = scan.nextLine();
-                if (typeNumber.isBlank()) continue; //Если пустая строка, то переходит на следующую, воспринимая её как начало мудрости (её тип)
+                if (typeNumber.isBlank())
+                    continue; //Если пустая строка, то переходит на следующую, воспринимая её как начало мудрости (её тип)
                 Wisdom.NodeType type = Wisdom.NodeType.values()[Integer.parseInt(typeNumber.strip()) - 1];
                 Wisdom wisdom;
                 switch (type) {
@@ -49,7 +50,8 @@ public class SingleLinkedContainer {
             } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
                 //Введено несуществующее значение типа мудрости
                 //Пропускаются numberOfWisdomFields последующие строчки из-за невозможности определния типа
-                if (Client.verbose) Client.logOut.println("Wisdom skipped, moved by " + numberOfWisdomFields + " lines: Non-existent wisdom type: " + typeNumber);
+                if (Client.verbose)
+                    Client.logOut.println("Wisdom skipped, moved by " + numberOfWisdomFields + " lines: Non-existent wisdom type: " + typeNumber);
                 for (int i = 0; i < numberOfWisdomFields; i++) {
                     if (scan.hasNextLine()) scan.nextLine();
                     else return;

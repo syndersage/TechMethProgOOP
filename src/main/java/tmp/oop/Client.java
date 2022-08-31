@@ -1,6 +1,9 @@
 package tmp.oop;
 
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
@@ -12,6 +15,7 @@ import java.util.stream.Collectors;
 public class Client {
     public static boolean verbose = false;
     public static PrintStream logOut = System.out;
+
     public static void main(String[] args) {
         if (args.length == 3 && args[2].equals("-v")) verbose = true;
         else {
@@ -25,19 +29,18 @@ public class Client {
         String outputFilePath = Path.of(args[1]).isAbsolute() ? args[1] :
                 Path.of(System.getProperty("user.dir"), args[1]).toString();
         SingleLinkedContainer slc = new SingleLinkedContainer(); //Список в котором будут храниться мудрости
-        try(Scanner scan = new Scanner(Path.of(inputFilePath), StandardCharsets.UTF_8);   //Получение абсолютного пути к файлу чтения из 1 параметра
-            PrintWriter pw = new PrintWriter(outputFilePath)) { //Получение абсолютного пути к файлу записи из 2 параметра
+        try (Scanner scan = new Scanner(Path.of(inputFilePath), StandardCharsets.UTF_8);   //Получение абсолютного пути к файлу чтения из 1 параметра
+             PrintWriter pw = new PrintWriter(outputFilePath)) { //Получение абсолютного пути к файлу записи из 2 параметра
             slc.in(scan);
             pw.println("Filled container.\r\nContainer contains " + slc.getSize() + " elements.");
             slc.sort();
             slc.out(pw);
             slc.clear();
             pw.println("Empty container.\r\nContainer contains " + slc.getSize() + " elements.");
-        }
-        catch (FileNotFoundException | NoSuchFileException e) { //Если источник для записи/чтения не найден/недоступен
+        } catch (FileNotFoundException |
+                 NoSuchFileException e) { //Если источник для записи/чтения не найден или недоступен
             if (verbose) logOut.println("File not found: " + e.getMessage());
-        }
-        catch (IOException e) { //Прочие ошибки чтения и записи
+        } catch (IOException e) { //Прочие ошибки чтения и записи
             if (verbose) logOut.println("Input/Output error: " + e.getMessage());
         }
     }
