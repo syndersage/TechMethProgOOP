@@ -40,9 +40,18 @@ public class ClientTest {
         Client.main(new String[]{"F:\\Пользователи\\Pavel\\IdeaProjects\\TechMethProgOOP\\src\\test\\java\\ClientTestData\\in", "F:\\Пользователи\\Pavel\\IdeaProjects\\TechMethProgOOP\\src\\test\\java\\ClientTestData\\out"});
         String str = """
                 Filled container.\r
+                \r
                 Container contains 2 elements.\r
                 1: Aphorism: text. By: author. Rating score: 5\r
                 2: Proverb: text3. From: country. Rating score: 7\r
+                \r
+                Sorted container:\r
+                1: Aphorism: text. By: author. Rating score: 5\r
+                2: Proverb: text3. From: country. Rating score: 7\r
+                \r
+                Iterating every pair:\r
+                Aphorism and Proverb\r
+                \r
                 Empty container.\r
                 Container contains 0 elements.\r
                 """;

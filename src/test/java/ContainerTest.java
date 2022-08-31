@@ -227,7 +227,7 @@ public class ContainerTest {
                 2: Proverb: te!xt2. From: country. Rating score: 8\r
                 3: Aphorism: te!!xt. By: author. Rating score: 2\r
                 4: Aphorism: te!!!xt2. By: author. Rating score: 9\r
-                5: Riddle: te!!!!!xt2. Answer: answer.\r
+                5: Riddle: te!!!!!xt2. Answer: answer. Rating score: 6\r
                 """);
     }
 
