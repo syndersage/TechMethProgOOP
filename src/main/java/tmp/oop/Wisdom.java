@@ -54,6 +54,14 @@ public abstract class Wisdom implements Comparable<Wisdom> {
         }
     }
 
+    public abstract void inPairWith(Wisdom secondWisdom, PrintWriter pw);
+
+    public abstract void inPairWithAphorism(PrintWriter pw);
+
+    public abstract void inPairWithProverb(PrintWriter pw);
+
+    public abstract void inPairWithRiddle(PrintWriter pw);
+
     //Вывод информации о полях мудрости
     public abstract void out(PrintWriter pw);
 

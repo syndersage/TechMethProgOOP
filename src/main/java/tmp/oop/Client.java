@@ -32,11 +32,15 @@ public class Client {
         try (Scanner scan = new Scanner(Path.of(inputFilePath), StandardCharsets.UTF_8);   //Получение абсолютного пути к файлу чтения из 1 параметра
              PrintWriter pw = new PrintWriter(outputFilePath)) { //Получение абсолютного пути к файлу записи из 2 параметра
             slc.in(scan);
-            pw.println("Filled container.\r\nContainer contains " + slc.getSize() + " elements.");
-            slc.sort();
+            pw.println("Filled container.\r\n\r\nContainer contains " + slc.getSize() + " elements.");
             slc.out(pw);
+            slc.sort();
+            pw.println("\r\nSorted container:");
+            slc.out(pw);
+            pw.println("\r\nIterating every pair:");
+            slc.iterateEveryPair(pw);
             slc.clear();
-            pw.println("Empty container.\r\nContainer contains " + slc.getSize() + " elements.");
+            pw.println("\r\nEmpty container.\r\nContainer contains " + slc.getSize() + " elements.");
         } catch (FileNotFoundException |
                  NoSuchFileException e) { //Если источник для записи/чтения не найден или недоступен
             if (verbose) logOut.println("File not found: " + e.getMessage());

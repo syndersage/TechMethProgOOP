@@ -25,6 +25,26 @@ public class Riddle extends Wisdom {
         }
     }
 
+    @Override
+    public void inPairWith(Wisdom secondWisdom, PrintWriter pw) {
+        secondWisdom.inPairWithRiddle(pw);
+    }
+
+    @Override
+    public void inPairWithAphorism(PrintWriter pw) {
+        pw.println("Aphorism and Riddle");
+    }
+
+    @Override
+    public void inPairWithProverb(PrintWriter pw) {
+        pw.println("Riddle and Riddle");
+    }
+
+    @Override
+    public void inPairWithRiddle(PrintWriter pw) {
+        pw.println("Riddle and Riddle");
+    }
+
     /***
      * Выводит информацию о загадке и ответе на неё
      * @param pw ресурс для вывода информации

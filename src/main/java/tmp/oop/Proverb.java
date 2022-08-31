@@ -25,6 +25,26 @@ public class Proverb extends Wisdom {
         }
     }
 
+    @Override
+    public void inPairWith(Wisdom secondWisdom, PrintWriter pw) {
+        secondWisdom.inPairWithProverb(pw);
+    }
+
+    @Override
+    public void inPairWithAphorism(PrintWriter pw) {
+        pw.println("Aphorism and Proverb");
+    }
+
+    @Override
+    public void inPairWithProverb(PrintWriter pw) {
+        pw.println("Proverb and Proverb");
+    }
+
+    @Override
+    public void inPairWithRiddle(PrintWriter pw) {
+        pw.println("Riddle and Proverb");
+    }
+
     /***
      * Выводит информацию о пословице и сране происхождения
      * @param pw ресурс для вывода информации

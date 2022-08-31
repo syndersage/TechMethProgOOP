@@ -117,6 +117,18 @@ public class SingleLinkedContainer {
         return node;
     }
 
+    public void iterateEveryPair(PrintWriter pw) {
+        Node firstNode, secondNode;
+        for (int i = 0; i < size - 1; i++) {
+            firstNode = getNode(i);
+            for (int j = i + 1; j < size; j++) {
+                secondNode = getNode(j);
+                if (firstNode != null & secondNode != null)
+                    firstNode.wisdom.inPairWith(secondNode.wisdom, pw);
+            }
+        }
+    }
+
     public int getSize() {
         return size;
     }

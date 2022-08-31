@@ -25,6 +25,26 @@ public class Aphorism extends Wisdom {
         }
     }
 
+    @Override
+    public void inPairWith(Wisdom secondWisdom, PrintWriter pw) {
+        secondWisdom.inPairWithAphorism(pw);
+    }
+
+    @Override
+    public void inPairWithAphorism(PrintWriter pw) {
+        pw.println("Aphorism and Aphorism");
+    }
+
+    @Override
+    public void inPairWithProverb(PrintWriter pw) {
+        pw.println("Proverb and Aphorism");
+    }
+
+    @Override
+    public void inPairWithRiddle(PrintWriter pw) {
+        pw.println("Riddle and Aphorism");
+    }
+
     /***
      * Выводит информацию об афоризме и авторе
      * @param pw ресурс для вывода информации
