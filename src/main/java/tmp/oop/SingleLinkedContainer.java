@@ -117,6 +117,17 @@ public class SingleLinkedContainer {
         return node;
     }
 
+    /**
+     * Получение мудрости по её порядковому номеру в списке
+     *
+     * @param index порядковый номер
+     * @return Wisdom - если индекс корректен, иначе null
+     */
+    public Wisdom get(int index) {
+        Node wisdomNode = getNode(index);
+        return wisdomNode == null ? null : wisdomNode.wisdom;
+    }
+
     public void iterateEveryPair(PrintWriter pw) {
         Node firstNode, secondNode;
         for (int i = 0; i < size - 1; i++) {
