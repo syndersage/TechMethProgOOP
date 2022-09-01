@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import tmp.oop.Client;
 import tmp.oop.SingleLinkedContainer;
 
 import java.io.IOException;
@@ -103,6 +104,7 @@ public class ContainerTest {
     @Test
     void spacesInWisdomTypeLineTest() throws IOException {
         input = "  \t1\r\nauthor\ntext\n5\n2\ncountry\ntext\n10";
+        Client.verbose = true;
         slc.in(new Scanner(input));
         assertEquals(2, slc.getSize());
     }
@@ -219,6 +221,66 @@ public class ContainerTest {
     @Test
     void sortFiveElementsTest() throws IOException {
         input = "1\nauthor\nte!!xt\n2\n2\ncountry\ntext2\n8\n3\nanswer\nte!!!!!xt2\n6\n2\ncountry\nte!xt2\n8\n1\nauthor\nte!!!xt2\n9";
+        slc.in(new Scanner(input));
+        slc.sort();
+        slc.out(new PrintWriter(output));
+        assertEquals(output.toString(), """
+                1: Proverb: text2. From: country. Rating score: 8\r
+                2: Proverb: te!xt2. From: country. Rating score: 8\r
+                3: Aphorism: te!!xt. By: author. Rating score: 2\r
+                4: Aphorism: te!!!xt2. By: author. Rating score: 9\r
+                5: Riddle: te!!!!!xt2. Answer: answer. Rating score: 6\r
+                """);
+    }
+
+    @Test
+    void emptyLinesAtBeginningTest() throws IOException {
+        input = "\n\n\n\n\n\n\n\n1\nauthor\nte!!xt\n2\n2\ncountry\ntext2\n8\n3\nanswer\nte!!!!!xt2\n6\n2\ncountry\nte!xt2\n8\n1\nauthor\nte!!!xt2\n9";
+        slc.in(new Scanner(input));
+        slc.sort();
+        slc.out(new PrintWriter(output));
+        assertEquals(output.toString(), """
+                1: Proverb: text2. From: country. Rating score: 8\r
+                2: Proverb: te!xt2. From: country. Rating score: 8\r
+                3: Aphorism: te!!xt. By: author. Rating score: 2\r
+                4: Aphorism: te!!!xt2. By: author. Rating score: 9\r
+                5: Riddle: te!!!!!xt2. Answer: answer. Rating score: 6\r
+                """);
+    }
+
+    @Test
+    void emptyLinesAtStartAndBetweenWisdomElementsTest() throws IOException {
+        input = "\n\n\n\n\n\n\n\n1\nauthor\nte!!xt\n2\n\n\n\n\n2\ncountry\ntext2\n8\n3\nanswer\nte!!!!!xt2\n6\n\n\n\n\n2\ncountry\nte!xt2\n8\n\n\n1\nauthor\nte!!!xt2\n9";
+        slc.in(new Scanner(input));
+        slc.sort();
+        slc.out(new PrintWriter(output));
+        assertEquals(output.toString(), """
+                1: Proverb: text2. From: country. Rating score: 8\r
+                2: Proverb: te!xt2. From: country. Rating score: 8\r
+                3: Aphorism: te!!xt. By: author. Rating score: 2\r
+                4: Aphorism: te!!!xt2. By: author. Rating score: 9\r
+                5: Riddle: te!!!!!xt2. Answer: answer. Rating score: 6\r
+                """);
+    }
+
+    @Test
+    void emptyLinesAtTheEndTest() throws IOException {
+        input = "1\nauthor\nte!!xt\n2\n2\ncountry\ntext2\n8\n3\nanswer\nte!!!!!xt2\n6\n2\ncountry\nte!xt2\n8\n1\nauthor\nte!!!xt2\n9\n\n\n\n\n    ";
+        slc.in(new Scanner(input));
+        slc.sort();
+        slc.out(new PrintWriter(output));
+        assertEquals(output.toString(), """
+                1: Proverb: text2. From: country. Rating score: 8\r
+                2: Proverb: te!xt2. From: country. Rating score: 8\r
+                3: Aphorism: te!!xt. By: author. Rating score: 2\r
+                4: Aphorism: te!!!xt2. By: author. Rating score: 9\r
+                5: Riddle: te!!!!!xt2. Answer: answer. Rating score: 6\r
+                """);
+    }
+
+    @Test
+    void blankLinesBeforeAfterBetweenWisdomElementsTest() throws IOException {
+        input = "    \n     1\nauthor\nte!!xt\n2\n2\ncountry\ntext2\n8\n\t\r\t\r3\nanswer\nte!!!!!xt2\n6\n2\ncountry\nte!xt2\n8\n  \t \n \r    1\nauthor\nte!!!xt2\n9\n   \r\r\r   \r\n\n\t\n\n    ";
         slc.in(new Scanner(input));
         slc.sort();
         slc.out(new PrintWriter(output));

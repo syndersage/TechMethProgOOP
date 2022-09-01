@@ -19,13 +19,13 @@ public class ClientTest {
 
     @Test
     void argumentTest() {
-        Client.main(new String[]{"input", "output", "-v"});
+        Client.main(new String[]{"input.txt", "output.txt", "-v"});
         assertTrue(Client.verbose);
     }
 
     @Test
     void argument2Test() {
-        Client.main(new String[]{"input", "output", "йцу"});
+        Client.main(new String[]{"input.txt", "output.txt", "йцу"});
         assertFalse(Client.verbose);
     }
 
@@ -56,5 +56,32 @@ public class ClientTest {
                 Container contains 0 elements.\r
                 """;
         assertEquals(str, Files.readString(Path.of("F:\\Пользователи\\Pavel\\IdeaProjects\\TechMethProgOOP\\src\\test\\java\\ClientTestData\\out")));
+    }
+
+    @Test
+    void correctPrintWrite2Test() throws IOException {
+        Client.main(new String[]{"F:\\Пользователи\\Pavel\\IdeaProjects\\TechMethProgOOP\\src\\test\\java\\ClientTestData\\in2", "F:\\Пользователи\\Pavel\\IdeaProjects\\TechMethProgOOP\\src\\test\\java\\ClientTestData\\out2"});
+        String str = """
+                Filled container.\r
+                \r
+                Container contains 3 elements.\r
+                1: Aphorism: Не беспокойся о том, что тебя не знают. Беспокойся о том, достоин ли ты того, чтобы тебя знали.. By: Конфуций. Rating score: 10\r
+                2: Proverb: Не плюй в колодец, пригодится воды напиться. From: Россия. Rating score: 4\r
+                3: Proverb: Still waters run deep. From: England. Rating score: 5\r
+                \r
+                Sorted container:\r
+                1: Proverb: Still waters run deep. From: England. Rating score: 5\r
+                2: Proverb: Не плюй в колодец, пригодится воды напиться. From: Россия. Rating score: 4\r
+                3: Aphorism: Не беспокойся о том, что тебя не знают. Беспокойся о том, достоин ли ты того, чтобы тебя знали.. By: Конфуций. Rating score: 10\r
+                \r
+                Iterating every pair:\r
+                Proverb and Proverb\r
+                Proverb and Aphorism\r
+                Proverb and Aphorism\r
+                \r
+                Empty container.\r
+                Container contains 0 elements.\r
+                """;
+        assertEquals(str, Files.readString(Path.of("F:\\Пользователи\\Pavel\\IdeaProjects\\TechMethProgOOP\\src\\test\\java\\ClientTestData\\out2")));
     }
 }

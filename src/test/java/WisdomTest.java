@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 import tmp.oop.Aphorism;
 import tmp.oop.Wisdom;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,9 +17,12 @@ public class WisdomTest {
     String input;
     Wisdom w1;
 
+    StringWriter str;
+
     @BeforeEach
     void w1Init() {
         w1 = null;
+        str = new StringWriter();
     }
 
     @Test
@@ -53,10 +59,53 @@ public class WisdomTest {
     }
 
     @Test
-    void setGetTextTest() {
+    void setCorrectRateTest() {
         input = "5";
         w1 = new Aphorism();
         w1.inRate(new Scanner(input));
         assertEquals(5, w1.getRate());
+    }
+
+    @Test
+    void setCorrectTextTest() {
+        input = "h e l l o";
+        w1 = new Aphorism();
+        w1.inText(new Scanner(input));
+        assertEquals(input, w1.getText());
+    }
+
+    @Test
+    void setIncorrectBlankTextTest() {
+        input = "        ";
+        w1 = new Aphorism();
+        assertThrows(NoSuchElementException.class, () -> w1.inText(new Scanner(input)));
+    }
+
+
+    @Test
+    void setCorrectDataParamsTest() {
+        input = "author";
+        w1 = new Aphorism();
+        assertDoesNotThrow(() -> w1.inData(new Scanner(input)));
+        w1.out(new PrintWriter(str));
+        assertEquals("Aphorism: null. By: " + input + ". Rating score: 0\r\n", str.toString());
+    }
+
+    @Test
+    void setIncorrectEmptyDataParamsTest() {
+        input = "";
+        w1 = new Aphorism();
+        assertThrows(NoSuchElementException.class, () -> w1.inData(new Scanner(input)));
+        w1.out(new PrintWriter(str));
+        assertEquals("Aphorism: null. By: null. Rating score: 0\r\n", str.toString());
+    }
+
+    @Test
+    void setIncorrectBlankDataParamsTest() {
+        input = " \t \r  ";
+        w1 = new Aphorism();
+        assertThrows(NoSuchElementException.class, () -> w1.inData(new Scanner(input)));
+        w1.out(new PrintWriter(str));
+        assertEquals("Aphorism: null. By: null. Rating score: 0\r\n", str.toString());
     }
 }
