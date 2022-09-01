@@ -2,6 +2,7 @@ package tmp.oop;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class SingleLinkedContainer {
@@ -21,24 +22,11 @@ public class SingleLinkedContainer {
      * @throws IOException при проблемах с чтением из источника
      */
     public void in(Scanner scan) throws IllegalStateException, IOException {
-        final int numberOfWisdomFields = 3;
         while (scan.hasNextLine()) {
-            String typeNumber = "-1"; //Строка для чтения типа мудрости
             try {
-                typeNumber = scan.nextLine();
-                if (typeNumber.isBlank())
-                    continue; //Если пустая строка, то переходит на следующую, воспринимая её как начало мудрости (её тип)
-                Wisdom.NodeType type = Wisdom.NodeType.values()[Integer.parseInt(typeNumber.strip()) - 1];
                 Wisdom wisdom;
-                switch (type) {
-                    //Создание экземпляра указанного типа мудрости
-                    case PROVERB -> wisdom = new Proverb();
-                    case APHORISM -> wisdom = new Aphorism();
-                    case RIDDLE -> wisdom = new Riddle();
-                    default -> throw new IllegalStateException("Unexpected value: " + type);
-                }
-                wisdom.in(scan);
-                if (wisdom.valid()) {
+                wisdom = Wisdom.in(scan);
+                if (wisdom != null) {
                     //Добавление мудрости в список только если она валидна
                     Node newNode = new Node(wisdom, null);
                     if (tail != null) tail.next = newNode;
@@ -47,14 +35,11 @@ public class SingleLinkedContainer {
                     size++;
                     if (Client.verbose) Client.logOut.println("+Wisdom");
                 } else if (Client.verbose) Client.logOut.println("Wisdom skipped: incorrect wisdom parameters");
-            } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            } catch (NumberFormatException | NoSuchElementException e) {
                 //Введено несуществующее значение типа мудрости
                 //Пропускаются numberOfWisdomFields последующие строчки из-за невозможности определния типа
-                if (Client.verbose)
-                    Client.logOut.println("Wisdom skipped, moved by " + numberOfWisdomFields + " lines: Non-existent wisdom type: " + typeNumber);
-                for (int i = 0; i < numberOfWisdomFields; i++) {
-                    if (scan.hasNextLine()) scan.nextLine();
-                    else return;
+                if (Client.verbose) {
+                    Client.logOut.println(e.getMessage());
                 }
             }
         }

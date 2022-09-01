@@ -12,17 +12,16 @@ public class Aphorism extends Wisdom {
      * В экземпляр построчно передается иноформация из переданного источника об авторе и афоризме
      *
      * @param scan источник иноформации
+     * @throws NoSuchElementException если не удалось прочитать строку либо она пустая
      */
     @Override
-    public void in(Scanner scan) {
-        try {
-            this.author = scan.nextLine();
-            super.in(scan);
-        } catch (NoSuchElementException e) {
-            if (Client.verbose) Client.logOut.print("Cannot read wisdom: end of file. ");
-        } catch (NumberFormatException e) {
-            if (Client.verbose) Client.logOut.print("Wisdom skipped: Incorrect rating input. Expected: [1 ... 10]. ");
+    public void inData(Scanner scan) throws NoSuchElementException {
+        String line;
+        line = scan.nextLine();
+        if (line.isBlank()) {
+            throw new NoSuchElementException("Author must be at least one symbol length.");
         }
+        this.author = line;
     }
 
     @Override

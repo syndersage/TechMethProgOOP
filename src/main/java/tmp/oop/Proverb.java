@@ -14,15 +14,13 @@ public class Proverb extends Wisdom {
      * @param scan источник иноформации
      */
     @Override
-    public void in(Scanner scan) {
-        try {
-            this.country = scan.nextLine();
-            super.in(scan);
-        } catch (NoSuchElementException e) {
-            if (Client.verbose) Client.logOut.print("Cannot read wisdom: end of file. ");
-        } catch (NumberFormatException e) {
-            if (Client.verbose) Client.logOut.print("Incorrect rating input: Expected: [1 ... 10]. ");
+    public void inData(Scanner scan) throws NoSuchElementException {
+        String line;
+        line = scan.nextLine();
+        if (line.isBlank()) {
+            throw new NoSuchElementException("Country must be at least one symbol length.");
         }
+        this.country = line;
     }
 
     @Override

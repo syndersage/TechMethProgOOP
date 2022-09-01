@@ -22,10 +22,68 @@ public abstract class Wisdom implements Comparable<Wisdom> {
         return (int) (w1.countPunctuationMarks() - w2.countPunctuationMarks());
     }
 
-    //Заполнение полей мудрости
-    public void in(Scanner scan) {
-        inText(scan);
-        inRate(scan);
+    public abstract void inData(Scanner scan) throws NoSuchElementException;
+
+    /***
+     * Статический метод для заполнения данных о мудрости в соответствии с её типом
+     *
+     * @param scan источник данных, описывающих мудрость
+     * @return экземпляр мудрости
+     * @throws NumberFormatException указан несоответствущий тип или оценка мудрости
+     * @throws NoSuchElementException не удается прочитать строку, либо строка невалидна
+     */
+    public static Wisdom in(Scanner scan)
+            throws NumberFormatException, NoSuchElementException {
+        Wisdom wisdom;
+        Type wisdomType;
+        //Чтение строки для определения типа мудрости
+        String line = scan.nextLine();
+        if (line.isBlank()) {
+            //Пустая строка типа данных воспринимается как разделитель между мудростями
+            //Вызывается исключение, способствующее переходу к чтению новой мудрости со следующей строки
+            throw new NoSuchElementException("Empty line skipped");
+        } else {
+            line = line.strip();
+        }
+        try {
+            //Попытка парса числа (порядкового номера мудрости из нумерации) и вычисления типа мудрости
+            wisdomType = Type.values()[Integer.parseInt(line) - 1];
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            //Пропускает 3 следующие строчки (которые должны были быть параметрами мудрости)
+            //Работает только если количество параметров мудрости равно 3
+            for (int i = 0; i < 3; i++) {
+                if (scan.hasNextLine()) {
+                    scan.nextLine();
+                }
+            }
+            //Если введено не число, либо оно выходит за установленные границы
+            throw new NumberFormatException("Incorrect wisdom type. Expected: [1 - " +
+                    (Type.values().length + 1) + "]. Received: " + line);
+        }
+        //Создание экземпляра мудрости, в соответствии с введенным в прошлой строке типом
+        switch (wisdomType) {
+            case APHORISM -> wisdom = new Aphorism();
+            case PROVERB -> wisdom = new Proverb();
+            case RIDDLE -> wisdom = new Riddle();
+            default -> wisdom = null;
+        }
+        if (wisdom != null) {
+            //Чтение следующих numOfFields строк (их количество определяется типом мудрости)
+            //После чего старый источник данных (Scanner) заменяется на новый
+            //Данное дейсвтие связано с тем, что при ошибке в типе, следующая строка будет считаться
+            //началом следующей мудрости илбо чего-то другого,
+            //хотя изначально под неё выделялось определенное количество строк
+            StringBuilder linesToRead = new StringBuilder();
+            for (int i = 0; i < wisdomType.numOfFields; i++) {
+                linesToRead.append(scan.nextLine()).append("\n");
+            }
+            scan = new Scanner(linesToRead.toString());
+            //Заполнение полей мудрости
+            wisdom.inData(scan);
+            wisdom.inText(scan);
+            wisdom.inRate(scan);
+        }
+        return wisdom;
     }
 
     /***
@@ -35,22 +93,35 @@ public abstract class Wisdom implements Comparable<Wisdom> {
      * @throws NoSuchElementException если не удается прочитать строку (конец файла)
      */
     public void inText(Scanner scan) throws NoSuchElementException {
-        this.text = scan.nextLine();
+        String line = scan.nextLine();
+        if (line.isBlank()) {
+            //Если строка не соответствует требованиям (пустая)
+            throw new NoSuchElementException("Wisdom text must be at least one symbol length.");
+        }
+        this.text = line;
     }
 
     /***
      * Чтение рейтинга и запись в соответствующее поле в соответствии с допустимыми значениями
      *
-     * @param scanner источник данных
+     * @param scan источник данных
      * @throws NumberFormatException если в строке указано не byte значение, либо величина не соответствует требуемым значениям
      * @throws NoSuchElementException если не удается прочитать строку (конец файла)
      */
-    public void inRate(Scanner scanner) throws NumberFormatException, NoSuchElementException {
-        rate = 0; //По-умолчанию значение 0 - оценка отсутствует
-        this.rate = Byte.parseByte(scanner.nextLine());
+    public void inRate(Scanner scan) throws NumberFormatException, NoSuchElementException {
+        //Чтение строки с информацией об оценке
+        String line = scan.nextLine();
+        try {
+            //Парсинг числа (значения оценки) из прочитанной строки
+            rate = Byte.parseByte(line);
+        } catch (NumberFormatException e) {
+            //Если входные данные - не число
+            throw new NumberFormatException("Incorrect rate input.txt: Expected: [1 - 10]. Received: " + line);
+        }
+        //Проверка на соответствие установленным значениям оценки мудрости
         if (rate < 1 | rate > 10) {
             rate = 0;
-            throw new NumberFormatException();
+            throw new NumberFormatException("Incorrect rate value: Expected: [1 - 10]. Received: " + line);
         }
     }
 
@@ -100,7 +171,12 @@ public abstract class Wisdom implements Comparable<Wisdom> {
     }
 
     //Типы мудростей
-    enum NodeType {
-        APHORISM, PROVERB, RIDDLE
+    enum Type {
+        APHORISM(3), PROVERB(3), RIDDLE(3);
+        private final int numOfFields;
+
+        Type(int numOfFields) {
+            this.numOfFields = numOfFields;
+        }
     }
 }
