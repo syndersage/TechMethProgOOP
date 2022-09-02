@@ -8,7 +8,7 @@ public class Riddle extends Wisdom {
     //Ответ на загадку
     private String answer;
 
-    /***
+    /**
      * В экземпляр построчно передается иноформация из переданного источника о загадке и ответе на неё
      *
      * @param scan источник иноформации
@@ -35,7 +35,7 @@ public class Riddle extends Wisdom {
 
     @Override
     public void inPairWithProverb(PrintWriter pw) {
-        pw.println("Riddle and Riddle");
+        pw.println("Proverb and Riddle");
     }
 
     @Override
@@ -43,7 +43,7 @@ public class Riddle extends Wisdom {
         pw.println("Riddle and Riddle");
     }
 
-    /***
+    /**
      * Выводит информацию о загадке и ответе на неё
      * @param pw ресурс для вывода информации
      */
@@ -52,7 +52,7 @@ public class Riddle extends Wisdom {
         pw.println("Riddle: " + getText() + ". Answer: " + answer + ". Rating score: " + getRate());
     }
 
-    /***
+    /**
      * Экземпляр загадки проверяется на то, что текст или ответ не null и не пустые
      *
      * @return boolean - можно или нет считать экземпляр валидным

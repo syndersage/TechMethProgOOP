@@ -8,7 +8,7 @@ public class Aphorism extends Wisdom {
     //Автор афоризмы
     private String author;
 
-    /***
+    /**
      * В экземпляр построчно передается иноформация из переданного источника об авторе и афоризме
      *
      * @param scan источник иноформации
@@ -44,7 +44,7 @@ public class Aphorism extends Wisdom {
         pw.println("Riddle and Aphorism");
     }
 
-    /***
+    /**
      * Выводит информацию об афоризме и авторе
      * @param pw ресурс для вывода информации
      */
@@ -53,7 +53,7 @@ public class Aphorism extends Wisdom {
         pw.println("Aphorism: " + getText() + ". By: " + author + ". Rating score: " + getRate());
     }
 
-    /***
+    /**
      * Экземпляр афоризмы проверяется на валидность родительского метода и то что поле автор не null и не пустое
      * Экземпляр афоризмы проверяется на то, что текст или автор не null и не пустые
      *

@@ -14,7 +14,7 @@ public class SingleLinkedContainer {
     private Node tail;
 
 
-    /***
+    /**
      * Чтение из источника информации о мудростях, и запись их в список
      *
      * @param scan источник для чтения
@@ -34,10 +34,10 @@ public class SingleLinkedContainer {
                     tail = newNode;
                     size++;
                     if (Client.verbose) Client.logOut.println("+Wisdom");
-                } else if (Client.verbose) Client.logOut.println("Wisdom skipped: incorrect wisdom parameters");
+                }
             } catch (NumberFormatException | NoSuchElementException e) {
                 //Введено несуществующее значение типа мудрости
-                //Пропускаются numberOfWisdomFields последующие строчки из-за невозможности определния типа
+                //пропускаются numberOfWisdomFields последующие строчки из-за невозможности определения типа
                 if (Client.verbose) {
                     Client.logOut.println(e.getMessage());
                 }

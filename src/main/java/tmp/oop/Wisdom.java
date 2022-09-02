@@ -11,20 +11,10 @@ public abstract class Wisdom implements Comparable<Wisdom> {
     //Оценка мудрости
     private byte rate;
 
-    /***
-     * Сравнивает две мудрости. Для сравнения используется величина рейтинга (поля rate)
-     *
-     * @param w1 мудрость 1
-     * @param w2 мудрость 2
-     * @return 0 если w1 == w2, меньше 0 если w1 < w2, больше 0 если w1 > w2
-     */
-    static int compare(Wisdom w1, Wisdom w2) {
-        return (int) (w1.countPunctuationMarks() - w2.countPunctuationMarks());
-    }
-
+    //Абстрактный метод для чтения параметров, появляющихся у наследующих данный (Wisdom) класс
     public abstract void inData(Scanner scan) throws NoSuchElementException;
 
-    /***
+    /**
      * Статический метод для заполнения данных о мудрости в соответствии с её типом
      *
      * @param scan источник данных, описывающих мудрость
@@ -40,8 +30,8 @@ public abstract class Wisdom implements Comparable<Wisdom> {
         String line = scan.nextLine();
         if (line.isBlank()) {
             //Пустая строка типа данных воспринимается как разделитель между мудростями
-            //Вызывается исключение, способствующее переходу к чтению новой мудрости со следующей строки
-            throw new NoSuchElementException("Empty line skipped");
+            //возвращается null значение, способствующее переходу на следующую строку как на начало новой мудрости
+            return null;
         } else {
             line = line.strip();
         }
@@ -86,7 +76,7 @@ public abstract class Wisdom implements Comparable<Wisdom> {
         return wisdom;
     }
 
-    /***
+    /**
      * Чтение текста мудрости и запись в соответствующее поле
      *
      * @param scan источник данных
@@ -101,7 +91,7 @@ public abstract class Wisdom implements Comparable<Wisdom> {
         this.text = line;
     }
 
-    /***
+    /**
      * Чтение рейтинга и запись в соответствующее поле в соответствии с допустимыми значениями
      *
      * @param scan источник данных
@@ -125,19 +115,44 @@ public abstract class Wisdom implements Comparable<Wisdom> {
         }
     }
 
+    /**
+     * Абстрактный метод, в котором должны описываться действия для вывода пары мудростей
+     * Тело метода будет зависеть от того, от какой мудрости вызван метод
+     *
+     * @param secondWisdom вторая мудрость, с которой первая должна состоять в паре
+     * @param pw источник для записи информации о паре
+     */
     public abstract void inPairWith(Wisdom secondWisdom, PrintWriter pw);
 
+    /**
+     * Абстрактный метод с описанием действий для вывода информации о паре мудростей,
+     * где одна из мудростей Aphorism, вторая - та, из экземпляра которой был вызван метод
+     *
+     * @param pw источник для записи информации о паре
+     */
     public abstract void inPairWithAphorism(PrintWriter pw);
 
+    /**
+     * Абстрактный метод с описанием действий для вывода информации о паре мудростей,
+     * где одна из мудростей Proverb, вторая - та, из экземпляра которой был вызван метод
+     *
+     * @param pw источник для записи информации о паре
+     */
     public abstract void inPairWithProverb(PrintWriter pw);
 
+    /**
+     * Абстрактный метод с описанием действий для вывода информации о паре мудростей,
+     * где одна из мудростей Riddle, вторая - та, из экземпляра которой был вызван метод
+     *
+     * @param pw источник для записи информации о паре
+     */
     public abstract void inPairWithRiddle(PrintWriter pw);
 
     //Вывод информации о полях мудрости
     public abstract void out(PrintWriter pw);
 
 
-    /***
+    /**
      * Проверка мудрости на корректность - текста и рейтинга
      *
      * @return является ли экземпляр корректным
@@ -154,7 +169,7 @@ public abstract class Wisdom implements Comparable<Wisdom> {
         return rate;
     }
 
-    /***
+     /**
      * Подсчет количества знаков припинания у мудрости (поля text)
      *
      * @return целое число - кол-во знаков препинания
@@ -165,9 +180,17 @@ public abstract class Wisdom implements Comparable<Wisdom> {
         return text.chars().filter((x) -> punMarks.indexOf(x) != -1).count(); //Удаление из потока всех символов, не входящими в строку punMarks и вывод их количества
     }
 
+    /**
+     * Реализация метода, необходимого для наследования интерфейса Compareable,
+     * позволяющего сравнивать 2 экземпляра данного класса по величине.
+     * Для сравнения подсчитывается количество знаков препинания
+     *
+     * @param obj мудрость с которой будет производиться сравнение
+     * @return 0 - this == obj, меньше 0 - this < obj, больше 0 - this > obj
+     */
     @Override
-    public int compareTo(Wisdom o) {
-        return compare(this, o);
+    public int compareTo(Wisdom obj) {
+        return (int) (this.countPunctuationMarks() - obj.countPunctuationMarks());
     }
 
     //Типы мудростей

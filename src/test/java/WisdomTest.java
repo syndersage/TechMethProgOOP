@@ -2,6 +2,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tmp.oop.Aphorism;
+import tmp.oop.Proverb;
+import tmp.oop.Riddle;
 import tmp.oop.Wisdom;
 
 import java.io.PrintWriter;
@@ -107,5 +109,19 @@ public class WisdomTest {
         assertThrows(NoSuchElementException.class, () -> w1.inData(new Scanner(input)));
         w1.out(new PrintWriter(str));
         assertEquals("Aphorism: null. By: null. Rating score: 0\r\n", str.toString());
+    }
+
+    @Test
+    void compareToMethodTest() {
+        Wisdom riddle = new Riddle();
+        Wisdom aphorism = new Aphorism();
+        Wisdom proverb = new Proverb();
+        riddle.inText(new Scanner("one ! punctuation mark"));
+        aphorism.inText(new Scanner("two :: punctuation marks"));
+        proverb.inText(new Scanner("zero punctuation marks"));
+        assertTrue(riddle.compareTo(aphorism) < 0);
+        assertTrue(riddle.compareTo(proverb) > 0);
+        proverb.inText(new Scanner("one ! punctuation marks"));
+        assertEquals(0, riddle.compareTo(proverb));
     }
 }

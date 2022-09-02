@@ -8,7 +8,7 @@ public class Proverb extends Wisdom {
     //Страна
     private String country;
 
-    /***
+    /**
      * В экземпляр построчно заносится иноформация из переданного источника о стране и пословице
      *
      * @param scan источник иноформации
@@ -43,7 +43,7 @@ public class Proverb extends Wisdom {
         pw.println("Riddle and Proverb");
     }
 
-    /***
+    /**
      * Выводит информацию о пословице и сране происхождения
      * @param pw ресурс для вывода информации
      */
@@ -52,7 +52,7 @@ public class Proverb extends Wisdom {
         pw.println("Proverb: " + getText() + ". From: " + country + ". Rating score: " + getRate());
     }
 
-    /***
+    /**
      * Экземпляр пословицы проверяется на валидность родительского метода и то что поле страна не null и не пустое
      * Экземпляр пословицы проверяется на то, что текст или страна не null и не пустые
      *
