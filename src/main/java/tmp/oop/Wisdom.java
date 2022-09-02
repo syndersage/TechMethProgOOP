@@ -106,7 +106,7 @@ public abstract class Wisdom implements Comparable<Wisdom> {
             rate = Byte.parseByte(line);
         } catch (NumberFormatException e) {
             //Если входные данные - не число
-            throw new NumberFormatException("Incorrect rate input.txt: Expected: [1 - 10]. Received: " + line);
+            throw new NumberFormatException("Incorrect rate input: Expected: [1 - 10]. Received: " + line);
         }
         //Проверка на соответствие установленным значениям оценки мудрости
         if (rate < 1 | rate > 10) {

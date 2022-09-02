@@ -1,51 +1,49 @@
 package tmp.oop;
 
-import java.io.FileNotFoundException;
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.ParameterException;
+
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.Objects;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Client {
-    public static boolean verbose = false;
     public static PrintStream logOut = System.out;
+    public static Args arguments = new Args();
 
     public static void main(String[] args) {
-        if (args.length == 3 && args[2].equals("-v")) verbose = true;
-        else {
-            if (args.length != 2) { //Проверка на количество параметров запуска
-                System.out.println("Incorrect parameters. Expected: input_file output_file verbose(optional)" + " Received: " + Arrays.stream(args).map(Objects::toString).collect(Collectors.joining(" ")));
-                return;
-            }
+        JCommander jCmd = JCommander.newBuilder().addObject(arguments).build();
+        jCmd.setProgramName("Client");
+        try {
+            jCmd.parse(args);
+        } catch (ParameterException e) {
+            System.out.println(e.getMessage());
+            jCmd.usage();
+            return;
         }
-        String inputFilePath = Path.of(args[0]).isAbsolute() ? args[0] :     //Если параметр относительный путь, то
-                Path.of(System.getProperty("user.dir"), args[0]).toString(); //указанный путь добавляется к рабочей директории
-        String outputFilePath = Path.of(args[1]).isAbsolute() ? args[1] :
-                Path.of(System.getProperty("user.dir"), args[1]).toString();
+        if (arguments.help) {
+            jCmd.usage();
+            return;
+        }
         SingleLinkedContainer slc = new SingleLinkedContainer(); //Список в котором будут храниться мудрости
-        try (Scanner scan = new Scanner(Path.of(inputFilePath), StandardCharsets.UTF_8);   //Получение абсолютного пути к файлу чтения из 1 параметра
-             PrintWriter pw = new PrintWriter(outputFilePath)) { //Получение абсолютного пути к файлу записи из 2 параметра
+        try (Scanner scan = new Scanner(arguments.inPath, StandardCharsets.UTF_8);   //Получение абсолютного пути к файлу чтения из 1 параметра
+             PrintWriter pw = new PrintWriter(arguments.outPath.toString())) { //Получение абсолютного пути к файлу записи из 2 параметра
             slc.in(scan);
             pw.println("Filled container.\r\n\r\nContainer contains " + slc.getSize() + " elements.");
+            if (arguments.sort) {
+                slc.sort();
+            }
             slc.out(pw);
-            slc.sort();
-            pw.println("\r\nSorted container:");
-            slc.out(pw);
-            pw.println("\r\nIterating every pair:");
-            slc.iterateEveryPair(pw);
+            if (arguments.pair) {
+                pw.println("\r\nIterating every pair:");
+                slc.iterateEveryPair(pw);
+            }
             slc.clear();
             pw.println("\r\nEmpty container.\r\nContainer contains " + slc.getSize() + " elements.");
-        } catch (FileNotFoundException |
-                 NoSuchFileException e) { //Если источник для записи/чтения не найден или недоступен
-            if (verbose) logOut.println("File not found: " + e.getMessage());
         } catch (IOException e) { //Прочие ошибки чтения и записи
-            if (verbose) logOut.println("Input/Output error: " + e.getMessage());
+            if (arguments.verbose) logOut.println("Input/Output error: " + e.getMessage());
         }
     }
 }

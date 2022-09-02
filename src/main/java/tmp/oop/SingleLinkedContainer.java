@@ -33,12 +33,12 @@ public class SingleLinkedContainer {
                     if (head == null) head = newNode;
                     tail = newNode;
                     size++;
-                    if (Client.verbose) Client.logOut.println("+Wisdom");
+                    if (Client.arguments.verbose) Client.logOut.println("+Wisdom");
                 }
             } catch (NumberFormatException | NoSuchElementException e) {
                 //Введено несуществующее значение типа мудрости
                 //пропускаются numberOfWisdomFields последующие строчки из-за невозможности определения типа
-                if (Client.verbose) {
+                if (Client.arguments.verbose) {
                     Client.logOut.println(e.getMessage());
                 }
             }

@@ -104,7 +104,7 @@ public class ContainerTest {
     @Test
     void spacesInWisdomTypeLineTest() throws IOException {
         input = "  \t1\r\nauthor\ntext\n5\n2\ncountry\ntext\n10";
-        Client.verbose = true;
+        Client.arguments.verbose = true;
         slc.in(new Scanner(input));
         assertEquals(2, slc.getSize());
     }
