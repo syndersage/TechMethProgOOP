@@ -48,7 +48,7 @@ public abstract class Wisdom implements Comparable<Wisdom> {
             }
             //Если введено не число, либо оно выходит за установленные границы
             throw new NumberFormatException("Incorrect wisdom type. Expected: [1 - " +
-                    (Type.values().length + 1) + "]. Received: " + line);
+                    (Type.values().length) + "]. Received: " + line);
         }
         //Создание экземпляра мудрости, в соответствии с введенным в прошлой строке типом
         switch (wisdomType) {
