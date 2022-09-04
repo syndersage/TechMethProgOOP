@@ -31,7 +31,7 @@ public class Client {
         try (Scanner scan = new Scanner(arguments.inPath, StandardCharsets.UTF_8);   //Получение абсолютного пути к файлу чтения из 1 параметра
              PrintWriter pw = new PrintWriter(arguments.outPath.toString())) { //Получение абсолютного пути к файлу записи из 2 параметра
             slc.in(scan);
-            pw.println("Filled container.\r\n\r\nContainer contains " + slc.getSize() + " elements.");
+            pw.println("Filled container.\r\nContainer contains " + slc.getSize() + " elements.");
             if (arguments.sort) {
                 slc.sort();
             }
