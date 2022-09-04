@@ -49,7 +49,6 @@ public class ClientTest {
         Client.main(new String[]{"-i", "F:\\Пользователи\\Pavel\\IdeaProjects\\TechMethProgOOP\\src\\test\\java\\ClientTestData\\in", "-o", "F:\\Пользователи\\Pavel\\IdeaProjects\\TechMethProgOOP\\src\\test\\java\\ClientTestData\\out", "-v", "-s", "-p"});
         String str = """
                 Filled container.\r
-                \r
                 Container contains 2 elements.\r
                 1: Aphorism: text. By: author. Rating score: 5\r
                 2: Proverb: text3. From: country. Rating score: 7\r
@@ -68,7 +67,6 @@ public class ClientTest {
         Client.main(new String[]{"-i", "F:\\Пользователи\\Pavel\\IdeaProjects\\TechMethProgOOP\\src\\test\\java\\ClientTestData\\in2", "-o", "F:\\Пользователи\\Pavel\\IdeaProjects\\TechMethProgOOP\\src\\test\\java\\ClientTestData\\out2", "-v", "-s"});
         String str = """
                 Filled container.\r
-                \r
                 Container contains 3 elements.\r
                 1: Proverb: Still waters run deep. From: England. Rating score: 5\r
                 2: Proverb: Не плюй в колодец, пригодится воды напиться. From: Россия. Rating score: 4\r
@@ -85,7 +83,6 @@ public class ClientTest {
         Client.main(new String[]{"-i", "F:\\Пользователи\\Pavel\\IdeaProjects\\TechMethProgOOP\\src\\test\\java\\ClientTestData\\in2", "-o", "F:\\Пользователи\\Pavel\\IdeaProjects\\TechMethProgOOP\\src\\test\\java\\ClientTestData\\out2", "-p", "-v"});
         String str = """
                 Filled container.\r
-                \r
                 Container contains 3 elements.\r
                 1: Aphorism: Не беспокойся о том, что тебя не знают. Беспокойся о том, достоин ли ты того, чтобы тебя знали.. By: Конфуций. Rating score: 10\r
                 2: Proverb: Не плюй в колодец, пригодится воды напиться. From: Россия. Rating score: 4\r
