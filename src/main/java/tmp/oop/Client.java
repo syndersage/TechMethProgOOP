@@ -10,8 +10,8 @@ import java.util.Scanner;
 
 public class Client {
 
-  public static PrintStream logOut = System.out;
-  public static Args arguments = new Args();
+  public final static PrintStream LOG_OUT = System.out;
+  public final static Args arguments = new Args();
 
   public static void main(String[] args) {
     JCommander jCmd = JCommander.newBuilder().addObject(arguments).build();
@@ -45,9 +45,9 @@ public class Client {
       slc.clear();
       pw.println("\r\nEmpty container.\r\nContainer contains " + slc.getSize() + " elements.");
     } catch (IOException e) { //Прочие ошибки чтения и записи
-        if (arguments.verbose) {
-            logOut.println("Input/Output error: " + e.getMessage());
-        }
+      if (arguments.verbose) {
+        LOG_OUT.println("Input/Output error: " + e.getMessage());
+      }
     }
   }
 }
