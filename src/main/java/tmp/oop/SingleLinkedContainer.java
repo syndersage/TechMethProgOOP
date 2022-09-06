@@ -39,14 +39,14 @@ public class SingleLinkedContainer {
           tail = newNode;
           size++;
           if (Client.arguments.verbose) {
-            Client.logOut.println("+Wisdom");
+            Client.LOG_OUT.println("+Wisdom");
           }
         }
       } catch (NumberFormatException | NoSuchElementException e) {
         //Введено несуществующее значение типа мудрости
         //пропускаются numberOfWisdomFields последующие строчки из-за невозможности определения типа
         if (Client.arguments.verbose) {
-          Client.logOut.println(e.getMessage());
+          Client.LOG_OUT.println(e.getMessage());
         }
       }
     }
@@ -118,16 +118,10 @@ public class SingleLinkedContainer {
   }
 
   /**
-   * Получение мудрости по её порядковому номеру в списке
+   * Перебирает каждые 2 элемента из контейнера и выводит их типы
    *
-   * @param index порядковый номер
-   * @return Wisdom - если индекс корректен, иначе null
+   * @param pw источник для вывода информации о типах
    */
-  public Wisdom get(int index) {
-    Node wisdomNode = getNode(index);
-    return wisdomNode == null ? null : wisdomNode.wisdom;
-  }
-
   public void iterateEveryPair(PrintWriter pw) {
     Node firstNode, secondNode;
     for (int i = 0; i < size - 1; i++) {
