@@ -66,6 +66,25 @@ public class SingleLinkedContainer {
     }
   }
 
+  /**
+   * Вывод информации только о первом типе мудростей (афоризмов) при помощи вызова собственных элементов вывода мудростей
+   *
+   * @param pw источник для записи информации о мудростях
+   */
+  public void outFirstType(PrintWriter pw) {
+    Node temp = head;
+    if (temp == null || temp.wisdom == null) {
+      return;
+    }
+    for (int i = 1; i <= size; i++) {
+      if (temp.wisdom instanceof Aphorism) {
+        pw.print(i + ": ");
+        temp.wisdom.out(pw);
+      }
+      temp = temp.next;
+    }
+  }
+
   /***
    * Очистка списка
    */
