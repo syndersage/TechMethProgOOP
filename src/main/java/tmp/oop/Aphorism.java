@@ -4,6 +4,11 @@ import java.io.PrintWriter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Класс является описанием одного из типов мудрости - афоризма.
+ * В классе находятся только поля, относящиеся к афоризму, все общие поля располагаются в Wisdom.
+ * Описываются методы, которые работают исключительно с собственными полями.
+ */
 public class Aphorism extends Wisdom {
 
   //Автор афоризмы

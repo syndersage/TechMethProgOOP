@@ -4,6 +4,11 @@ import java.io.PrintWriter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Класс является описанием одного из типов мудрости - загадки.
+ * В классе находятся только поля, относящиеся к загадке, все общие поля располагаются в Wisdom.
+ * Описываются методы, которые работают исключительно с собственными полями.
+ */
 public class Riddle extends Wisdom {
 
   //Ответ на загадку

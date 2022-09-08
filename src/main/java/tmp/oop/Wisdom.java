@@ -4,6 +4,10 @@ import java.io.PrintWriter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Абстрактный класс является основанием для любой мудрости.
+ * В классе описываются общие для каждой мудрости поля, а также обязательные операции (методы) над ними и вызовы методов мудростей определенных типов
+ */
 public abstract class Wisdom implements Comparable<Wisdom> {
 
   //Текст мудрости

@@ -16,6 +16,9 @@ import org.junit.jupiter.api.Test;
 import tmp.oop.Client;
 import tmp.oop.SingleLinkedContainer;
 
+/**
+ * Класс содержит методы для тестирования класса SingleLinkedContainer на корректность работы его методов.
+ */
 @DisplayName("SingleLinkedContainer tests")
 public class ContainerTest {
 

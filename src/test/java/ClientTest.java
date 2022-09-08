@@ -10,6 +10,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tmp.oop.Client;
 
+/**
+ * Класс содержит методы для тестирования Client класса на корректную работу аргументов и чтение/запись файлов.
+ */
 @DisplayName("Client tests")
 public class ClientTest {
 

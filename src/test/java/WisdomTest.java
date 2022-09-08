@@ -16,6 +16,9 @@ import tmp.oop.Proverb;
 import tmp.oop.Riddle;
 import tmp.oop.Wisdom;
 
+/**
+ * Класс содержит методы для тестирования класса Wisdom на корректность заполнения полей и их чтение.
+ */
 @DisplayName("Wisdom tests")
 public class WisdomTest {
 

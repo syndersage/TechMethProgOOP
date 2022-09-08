@@ -4,6 +4,11 @@ import java.io.PrintWriter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Класс является описанием одного из типов мудрости - пословицы.
+ * В классе находятся только поля, относящиеся к пословице, все общие поля располагаются в Wisdom.
+ * Описываются методы, которые работают исключительно с собственными полями.
+ */
 public class Proverb extends Wisdom {
 
   //Страна

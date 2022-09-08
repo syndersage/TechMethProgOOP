@@ -5,6 +5,10 @@ import java.io.PrintWriter;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Класс представляет собой односвязный линейный список.
+ * Реализует методы взаимодействия со списком.
+ */
 public class SingleLinkedContainer {
 
   //Размер списка

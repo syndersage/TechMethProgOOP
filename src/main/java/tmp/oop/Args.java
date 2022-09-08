@@ -7,6 +7,10 @@ import com.beust.jcommander.converters.PathConverter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * Класс представляет собой описание всех параметров для данной программы.
+ * Вложенные классы описывают методы для валидации и конвертации.
+ */
 public class Args {
 
   @Parameter(names = {"-h", "--help"},

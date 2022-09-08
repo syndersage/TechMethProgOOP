@@ -8,9 +8,16 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+/**
+ * Главный класс программы, содержащий метод main.
+ * Описывает процедуры открытия/закрытия файлов, а также проведения операций над информацией в них в зависимости от указанных аргументов
+ */
 public class Client {
 
+  //Поток, в который будет осуществляться процесс работы программы (консоль)
   public final static PrintStream LOG_OUT = System.out;
+
+  //Общедоступное поле, содержащее информацию обо всех входных параметрах программы
   public final static Args arguments = new Args();
 
   public static void main(String[] args) {
