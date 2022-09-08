@@ -38,6 +38,10 @@ public class Client {
         slc.sort();
       }
       slc.out(pw);
+      if (arguments.firstType) {
+        pw.println("\r\nAphorisms:");
+        slc.outFirstType(pw);
+      }
       if (arguments.pair) {
         pw.println("\r\nIterating every pair:");
         slc.iterateEveryPair(pw);
