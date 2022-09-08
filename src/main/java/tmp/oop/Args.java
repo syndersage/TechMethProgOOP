@@ -35,6 +35,8 @@ public class Args {
       description = "Output in console information about program executing")
   public boolean verbose;
 
+  @Parameter(names = {"-f", "--first-type"}, description = "Additional write info about only first type of wisdom")
+  public boolean firstType;
 
   public static class FileExistsValidator implements IParameterValidator {
 
