@@ -306,4 +306,32 @@ public class ContainerTest {
     slc.out(new PrintWriter(output));
     assertEquals(output.toString(), "");
   }
+
+  @Test
+  void outFirstTypeTest() throws IOException {
+    input = "1\nhello\nworld\n10";
+    slc.in(new Scanner(input));
+    slc.outFirstType(new PrintWriter(output));
+    assertEquals(output.toString(), "1: Aphorism: world. By: hello. Rating score: 10\r\n");
+  }
+
+  @Test
+  void outFirstTypeEmptyTest() throws IOException {
+    input = "1\nhello\n   \n10";
+    slc.in(new Scanner(input));
+    slc.outFirstType(new PrintWriter(output));
+    assertEquals(output.toString(), "");
+  }
+
+  @Test
+  void outFirstType2Test() throws IOException {
+    input = "2\nqwe\newq\n5\n1\nhello\nworld\n10\n1\nhehe\nabcde\n6\n2\nworld\nhello\n1\n1\ncountry1\ntext1\n9";
+    slc.in(new Scanner(input));
+    slc.outFirstType(new PrintWriter(output));
+    assertEquals(output.toString(), """
+        2: Aphorism: world. By: hello. Rating score: 10\r
+        3: Aphorism: abcde. By: hehe. Rating score: 6\r
+        5: Aphorism: text1. By: country1. Rating score: 9\r
+        """);
+  }
 }
